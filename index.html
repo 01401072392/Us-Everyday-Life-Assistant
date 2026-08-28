@@ -1,0 +1,2931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="google-site-verification" content="hQx7z40COYM_bz6_RdxT1QwN4IywLklUZsKZn0iR908" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Everyday - US Life Assistant">
+<title>Everyday — US Life Assistant</title>
+
+<style>
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#101828;
+  --muted:#667085;
+  --line:#e4e7ec;
+  --blue:#175cd3;
+  --blue2:#0b4abf;
+  --soft:#eef4ff;
+  --shadow:0 10px 30px rgba(16,24,40,.07);
+  --radius:18px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* TOP BAR */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:72px;
+  background:var(--card);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:0 25px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:190px;
+}
+
+.logo-icon{
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  background:var(--blue);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:21px;
+  font-weight:bold;
+}
+
+.logo-title{
+  font-weight:800;
+  font-size:17px;
+}
+
+.logo-sub{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.top-search{
+  flex:1;
+  max-width:600px;
+  margin:auto;
+  height:44px;
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  padding:0 12px;
+}
+
+.top-search span{
+  font-size:22px;
+  color:var(--muted);
+}
+
+.top-search input{
+  border:0;
+  outline:0;
+  background:transparent;
+  width:100%;
+  padding:0 10px;
+  color:var(--text);
+}
+
+.top-actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.icon-btn,
+.avatar{
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:10px;
+  background:#f0f3f7;
+  color:var(--text);
+}
+
+.avatar{
+  border-radius:50%;
+  font-weight:bold;
+}
+
+.google-btn{
+  height:40px;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:10px;
+  padding:0 14px;
+  font-weight:bold;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:72px;
+  bottom:0;
+  width:235px;
+  background:var(--card);
+  border-right:1px solid var(--line);
+  padding:20px 13px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.nav a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:11px 13px;
+  margin:3px 0;
+  border-radius:10px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.nav a:hover,
+.nav a.active{
+  background:var(--soft);
+  color:var(--blue);
+  font-weight:bold;
+}
+
+.privacy{
+  background:#f1f4f8;
+  border-radius:12px;
+  padding:13px;
+  font-size:11px;
+  color:var(--muted);
+}
+
+/* MAIN */
+
+main{
+  margin-left:235px;
+  padding:22px 35px 80px;
+  max-width:1550px;
+}
+
+/* ADS */
+
+.ad{
+  height:90px;
+  width:100%;
+  border:1px dashed #c6cfdb;
+  border-radius:12px;
+  background:#fbfcfe;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  color:#98a2b3;
+  font-size:10px;
+  letter-spacing:2px;
+}
+
+.ad strong{
+  letter-spacing:0;
+  font-size:12px;
+}
+
+/* HERO */
+
+.hero{
+  margin-top:20px;
+  padding:55px;
+  min-height:420px;
+  border:1px solid #dce7f8;
+  border-radius:25px;
+  background:linear-gradient(120deg,#eef5ff,#ffffff);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  overflow:hidden;
+}
+
+.hero-content{
+  max-width:750px;
+}
+
+.eyebrow{
+  color:var(--blue);
+  font-weight:bold;
+  font-size:10px;
+  letter-spacing:2px;
+}
+
+.hero h1{
+  font-size:50px;
+  line-height:1.08;
+  margin:15px 0;
+}
+
+.hero h1 span{
+  color:var(--blue);
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:15px;
+  max-width:680px;
+}
+
+.hero-search{
+  margin-top:25px;
+  height:58px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  display:flex;
+  align-items:center;
+  padding:6px 7px 6px 17px;
+}
+
+.hero-search input{
+  border:0;
+  outline:0;
+  flex:1;
+  min-width:0;
+}
+
+.hero-search button,
+.primary{
+  border:0;
+  background:var(--blue);
+  color:white;
+  border-radius:10px;
+  padding:13px 20px;
+  font-weight:bold;
+}
+
+.hero-search button:hover,
+.primary:hover{
+  background:var(--blue2);
+}
+
+.chips{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.chips button{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--muted);
+  border-radius:20px;
+  padding:7px 11px;
+  font-size:11px;
+}
+
+.hero-circle{
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  background:radial-gradient(circle,#dbeafe,#93c5fd);
+  display:grid;
+  place-items:center;
+  font-size:75px;
+  color:white;
+}
+
+/* SECTION */
+
+.section{
+  margin-top:40px;
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:15px;
+}
+
+.section-title h2{
+  font-size:22px;
+}
+
+.section-title p{
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* QUICK TOOLS */
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:10px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+  text-align:left;
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow);
+  border-color:#c7d7f4;
+}
+
+.quick-card{
+  min-height:145px;
+}
+
+.card-icon{
+  font-size:27px;
+  display:block;
+  margin-bottom:18px;
+}
+
+.card strong{
+  display:block;
+  font-size:12px;
+}
+
+.card small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:4px;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-top:38px;
+}
+
+.panel{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+}
+
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+}
+
+.panel-head h3{
+  font-size:13px;
+}
+
+.weather{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:25px 5px;
+}
+
+.weather-icon{
+  font-size:45px;
+}
+
+.weather strong{
+  display:block;
+  font-size:31px;
+}
+
+.weather small{
+  color:var(--muted);
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--line);
+  padding-top:15px;
+}
+
+.stats div{
+  text-align:center;
+}
+
+.stats strong{
+  display:block;
+  font-size:18px;
+}
+
+.stats small{
+  color:var(--muted);
+  font-size:9px;
+}
+
+.empty{
+  height:150px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  color:var(--muted);
+  gap:4px;
+}
+
+/* TOOL GRID */
+
+.tool-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.tool-card{
+  min-height:150px;
+}
+
+/* FEATURE */
+
+.feature{
+  margin-top:40px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:42px 48px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  align-items:center;
+}
+
+.feature h2{
+  font-size:31px;
+  line-height:1.15;
+  margin:10px 0;
+}
+
+.feature p{
+  color:var(--muted);
+  font-size:13px;
+  max-width:530px;
+  margin-bottom:18px;
+}
+
+.feature-art{
+  height:220px;
+  border-radius:18px;
+  background:linear-gradient(145deg,#e5efff,#f8fbff);
+  display:grid;
+  place-items:center;
+  font-size:85px;
+}
+
+/* LOCAL */
+
+.local-box{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:25px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.local-icon{
+  width:52px;
+  height:52px;
+  background:var(--soft);
+  color:var(--blue);
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  font-size:25px;
+}
+
+.local-box h3{
+  font-size:14px;
+}
+
+.local-box p{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.local-box button{
+  margin-left:auto;
+}
+
+/* DOCUMENTS */
+
+.documents{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.doc{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:20px;
+  text-align:left;
+}
+
+.doc strong{
+  display:block;
+  font-size:12px;
+}
+
+.doc span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:5px;
+}
+
+/* CALCULATOR */
+
+.calculator{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+}
+
+.tabs{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  border-bottom:1px solid var(--line);
+  padding-bottom:14px;
+}
+
+.tabs button{
+  border:0;
+  background:#f0f3f7;
+  color:var(--muted);
+  border-radius:8px;
+  padding:8px 13px;
+  font-size:11px;
+}
+
+.tabs button.active{
+  background:var(--soft);
+  color:var(--blue);
+  font-weight:bold;
+}
+
+.calc-form{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:18px;
+}
+
+.field label{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-bottom:5px;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  height:42px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:0 10px;
+  outline:none;
+  background:white;
+}
+
+.result{
+  background:#f0f3f7;
+  border-radius:12px;
+  padding:15px;
+  margin-top:15px;
+}
+
+.result small{
+  color:var(--muted);
+  font-size:10px;
+}
+
+.result strong{
+  display:block;
+  font-size:25px;
+}
+
+/* FOOTER */
+
+footer{
+  margin-top:50px;
+  border-top:1px solid var(--line);
+  padding-top:25px;
+  color:var(--muted);
+  display:flex;
+  flex-wrap:wrap;
+  gap:25px;
+}
+
+footer strong{
+  color:var(--text);
+}
+
+footer p{
+  font-size:10px;
+}
+
+.footer-links{
+  margin-left:auto;
+  display:flex;
+  gap:18px;
+}
+
+.footer-links a{
+  font-size:10px;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(16,24,40,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(650px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:white;
+  border-radius:20px;
+  padding:30px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  right:15px;
+  top:15px;
+  width:32px;
+  height:32px;
+  border:0;
+  border-radius:50%;
+  background:#f0f3f7;
+  font-size:20px;
+}
+
+.modal-box h2{
+  margin:8px 0;
+}
+
+.modal-box p{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:18px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#101828;
+  color:white;
+  padding:12px 16px;
+  border-radius:10px;
+  font-size:11px;
+  opacity:0;
+  transform:translateY(10px);
+  transition:.2s;
+  z-index:2000;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* DARK MODE */
+
+body.dark{
+  --bg:#09111f;
+  --card:#111b2d;
+  --text:#f5f7fa;
+  --muted:#98a2b3;
+  --line:#27364d;
+  --soft:#172b4d;
+}
+
+body.dark .hero{
+  background:linear-gradient(120deg,#10213b,#111b2d);
+}
+
+body.dark .hero-search,
+body.dark .chips button,
+body.dark .google-btn,
+body.dark .feature,
+body.dark .local-box,
+body.dark .doc,
+body.dark .calculator,
+body.dark .ad{
+  background:var(--card);
+}
+
+body.dark .modal-box{
+  background:var(--card);
+}
+
+body.dark .field input,
+body.dark .field select,
+body.dark .field textarea{
+  background:#0e1726;
+  color:white;
+}
+
+/* MOBILE */
+
+.mobile-nav{
+  display:none;
+}
+
+@media(max-width:1100px){
+
+  .quick-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .tool-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .documents{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero-circle{
+    width:190px;
+    height:190px;
+  }
+}
+
+@media(max-width:800px){
+
+  .topbar{
+    height:64px;
+    padding:0 12px;
+  }
+
+  .logo{
+    min-width:auto;
+  }
+
+  .logo-sub{
+    display:none;
+  }
+
+  .top-search{
+    position:absolute;
+    top:73px;
+    left:12px;
+    right:12px;
+    max-width:none;
+  }
+
+  .google-btn{
+    display:none;
+  }
+
+  .sidebar{
+    display:none;
+  }
+
+  main{
+    margin-left:0;
+    padding:20px 13px 90px;
+    margin-top:48px;
+  }
+
+  .hero{
+    padding:35px 23px;
+  }
+
+  .hero h1{
+    font-size:36px;
+  }
+
+  .hero-circle{
+    display:none;
+  }
+
+  .dashboard,
+  .feature{
+    grid-template-columns:1fr;
+  }
+
+  .local-box{
+    flex-wrap:wrap;
+  }
+
+  .local-box button{
+    margin-left:0;
+  }
+
+  .calc-form{
+    grid-template-columns:1fr;
+  }
+
+  .mobile-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:65px;
+    background:var(--card);
+    border-top:1px solid var(--line);
+    display:flex;
+    justify-content:space-around;
+    z-index:500;
+  }
+
+  .mobile-nav a{
+    color:var(--muted);
+    text-align:center;
+    padding-top:8px;
+    font-size:18px;
+  }
+
+  .mobile-nav small{
+    display:block;
+    font-size:8px;
+  }
+
+  .footer-links{
+    margin-left:0;
+  }
+}
+
+@media(max-width:520px){
+
+  .quick-grid,
+  .tool-grid,
+  .documents{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .hero-search{
+    height:auto;
+  }
+
+  .hero-search input{
+    height:42px;
+  }
+
+  .hero-search button{
+    padding:10px;
+  }
+
+  .feature{
+    padding:28px 23px;
+  }
+
+  .feature h2{
+    font-size:25px;
+  }
+
+  .ad{
+    height:70px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+
+<header class="topbar">
+
+  <a class="logo" href="#home">
+    <div class="logo-icon">E</div>
+    <div>
+      <div class="logo-title">Everyday</div>
+      <span class="logo-sub">US Life Assistant</span>
+    </div>
+  </a>
+
+  <div class="top-search">
+    <span>⌕</span>
+    <input id="topSearch"
+      type="search"
+      placeholder="What do you need help with today?">
+  </div>
+
+  <div class="top-actions">
+    <button class="icon-btn" onclick="toggleDark()" title="Dark mode">☾</button>
+    <button class="icon-btn" onclick="showNotifications()">♢</button>
+    <button class="google-btn" onclick="googleLogin()">G&nbsp; Continue with Google</button>
+    <button class="avatar" onclick="showProfile()">U</button>
+  </div>
+
+</header>
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+  <nav class="nav">
+
+    <a class="active" href="#home">⌂ Home</a>
+    <a href="#assistant">✦ AI Assistant</a>
+    <a href="#tools">▦ All Tools</a>
+    <a href="#jobs">♙ Jobs</a>
+    <a href="#shopping">🛒 Shopping</a>
+    <a href="#local">⌖ Local Services</a>
+    <a href="#documents">▤ Documents</a>
+    <a href="#calculators">∑ Calculators</a>
+
+  </nav>
+
+  <div>
+
+    <nav class="nav">
+      <a href="#favorites">☆ Favorites</a>
+      <a href="#settings">⚙ Settings</a>
+    </nav>
+
+    <div class="privacy">
+      🔒 <strong>Privacy first</strong><br>
+      Your data stays yours.
+    </div>
+
+  </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main id="home">
+
+  <!-- AD #1 -->
+
+  <div class="ad">
+    <span>ADVERTISEMENT</span>
+    <strong>728 × 90</strong>
+  </div>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        🇺🇸 BUILT FOR EVERYDAY US LIFE
+      </div>
+
+      <h1>
+        One simple place<br>
+        <span>to get things done.</span>
+      </h1>
+
+      <p>
+        Search, compare, calculate, organize and get helpful guidance
+        for everyday life — all from one clean dashboard.
+      </p>
+
+      <div class="hero-search">
+
+        <span>⌕</span>
+
+        <input
+          id="heroSearch"
+          type="search"
+          placeholder="Try “find jobs near me”"
+        >
+
+        <button onclick="doSearch()">Search</button>
+
+      </div>
+
+      <div class="chips">
+
+        <button onclick="quickSearch('Find jobs near me')">
+          Find jobs
+        </button>
+
+        <button onclick="quickSearch('Compare products')">
+          Compare products
+        </button>
+
+        <button onclick="quickSearch('Calculate my budget')">
+          Calculate budget
+        </button>
+
+        <button onclick="quickSearch('Find local services')">
+          Local services
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="hero-circle">
+      ✦
+    </div>
+
+  </section>
+
+
+  <!-- QUICK ACTIONS -->
+
+  <section class="section" id="assistant">
+
+    <div class="section-title">
+      <div>
+        <h2>What can we help with?</h2>
+        <p>Popular everyday actions</p>
+      </div>
+    </div>
+
+    <div class="quick-grid">
+
+      <button class="card quick-card"
+        onclick="openTool('ai')">
+        <span class="card-icon">✦</span>
+        <strong>Ask Everyday AI</strong>
+        <small>Get guidance for any task</small>
+      </button>
+
+      <button class="card quick-card"
+        onclick="openTool('jobs')">
+        <span class="card-icon">♙</span>
+        <strong>Find a Job</strong>
+        <small>Search and organize applications</small>
+      </button>
+
+      <button class="card quick-card"
+        onclick="openTool('shopping')">
+        <span class="card-icon">🛒</span>
+        <strong>Compare Shopping</strong>
+        <small>Compare products and prices</small>
+      </button>
+
+      <button class="card quick-card"
+        onclick="openTool('local')">
+        <span class="card-icon">⌖</span>
+        <strong>Find Local Help</strong>
+        <small>Services around you</small>
+      </button>
+
+      <button class="card quick-card"
+        onclick="openTool('budget')">
+        <span class="card-icon">∑</span>
+        <strong>Calculate</strong>
+        <small>Money, home and more</small>
+      </button>
+
+      <button class="card quick-card"
+        onclick="openTool('documents')">
+        <span class="card-icon">▤</span>
+        <strong>Work With Files</strong>
+        <small>Organize your documents</small>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- DASHBOARD -->
+
+  <section class="dashboard">
+
+    <div class="panel">
+
+      <div class="panel-head">
+        <h3>Today's Overview</h3>
+        <span>☀</span>
+      </div>
+
+      <div class="weather">
+
+        <div class="weather-icon">☀</div>
+
+        <div>
+          <strong id="temperature">--°</strong>
+          <small id="locationText">Your location</small>
+        </div>
+
+      </div>
+
+      <div class="stats">
+
+        <div>
+          <strong id="taskCount">0</strong>
+          <small>Tasks</small>
+        </div>
+
+        <div>
+          <strong id="savedCount">0</strong>
+          <small>Saved</small>
+        </div>
+
+        <div>
+          <strong id="searchCount">0</strong>
+          <small>Searches</small>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel">
+
+      <div class="panel-head">
+        <h3>Recent Activity</h3>
+        <button onclick="clearActivity()">Clear</button>
+      </div>
+
+      <div id="activity" class="empty">
+
+        <div style="font-size:25px">◷</div>
+
+        <strong>No activity yet</strong>
+
+        <small>
+          Your recent searches will appear here.
+        </small>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TOOLS -->
+
+  <section class="section" id="tools">
+
+    <div class="section-title">
+
+      <div>
+        <h2>Everyday Tools</h2>
+        <p>Useful utilities in one place</p>
+      </div>
+
+    </div>
+
+    <div class="tool-grid">
+
+      <button class="card tool-card"
+        onclick="openTool('budget')">
+        <span class="card-icon">💵</span>
+        <strong>Budget Planner</strong>
+        <small>Plan monthly income and expenses</small>
+      </button>
+
+      <button class="card tool-card"
+        onclick="openTool('mortgage')">
+        <span class="card-icon">🏠</span>
+        <strong>Mortgage Calculator</strong>
+        <small>Estimate monthly payment</small>
+      </button>
+
+      <button class="card tool-card"
+        onclick="openTool('loan')">
+        <span class="card-icon">💳</span>
+        <strong>Loan Calculator</strong>
+        <small>Estimate payment and interest</small>
+      </button>
+
+      <button class="card tool-card"
+        onclick="openTool('tip')">
+        <span class="card-icon">🧾</span>
+        <strong>Tip Calculator</strong>
+        <small>Split a restaurant bill</small>
+      </button>
+
+      <button class="card tool-card"
+        onclick="openTool('salary')">
+        <span class="card-icon">💼</span>
+        <strong>Salary Calculator</strong>
+        <small>Estimate gross pay</small>
+      </button>
+
+      <button class="card tool-card"
+        onclick="openTool('unit')">
+        <span class="card-icon">↔</span>
+        <strong>Unit Converter</strong>
+        <small>Miles, kilometers and more</small>
+      </button>
+
+      <button class="card tool-card"
+        onclick="openTool('documents')">
+        <span class="card-icon">📄</span>
+        <strong>Document Center</strong>
+        <small>Prepare document workflows</small>
+      </button>
+
+      <button class="card tool-card"
+        onclick="openTool('ai')">
+        <span class="card-icon">✦</span>
+        <strong>AI Task Helper</strong>
+        <small>Turn a question into a plan</small>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- JOBS -->
+
+  <section class="feature" id="jobs">
+
+    <div>
+
+      <div class="eyebrow">CAREER</div>
+
+      <h2>
+        Make job searching
+        less stressful.
+      </h2>
+
+      <p>
+        Keep job discovery, application notes, interview preparation
+        and resume assistance together.
+      </p>
+
+      <button class="primary"
+        onclick="openTool('jobs')">
+        Open Job Assistant
+      </button>
+
+    </div>
+
+    <div class="feature-art">
+      💼
+    </div>
+
+  </section>
+
+
+  <!-- SHOPPING -->
+
+  <section class="feature" id="shopping">
+
+    <div>
+
+      <div class="eyebrow">SHOPPING</div>
+
+      <h2>
+        Compare before
+        you buy.
+      </h2>
+
+      <p>
+        Search products, compare specifications and organize
+        your shortlist.
+      </p>
+
+      <button class="primary"
+        onclick="openTool('shopping')">
+        Open Shopping Assistant
+      </button>
+
+    </div>
+
+    <div class="feature-art">
+      🛍️
+    </div>
+
+  </section>
+
+
+  <!-- LOCAL -->
+
+  <section class="section" id="local">
+
+    <div class="section-title">
+
+      <div>
+        <h2>Local Services</h2>
+        <p>Location-aware everyday search</p>
+      </div>
+
+    </div>
+
+    <div class="local-box">
+
+      <div class="local-icon">⌖</div>
+
+      <div>
+
+        <h3>Find trusted help nearby</h3>
+
+        <p>
+          Search for repair, cleaning, moving, healthcare,
+          restaurants and other services.
+        </p>
+
+      </div>
+
+      <button class="primary"
+        onclick="openTool('local')">
+        Search Nearby
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- DOCUMENTS -->
+
+  <section class="section" id="documents">
+
+    <div class="section-title">
+
+      <div>
+        <h2>Documents & Forms</h2>
+        <p>Simple document workflows</p>
+      </div>
+
+    </div>
+
+    <div class="documents">
+
+      <button class="doc"
+        onclick="openTool('pdf')">
+        <strong>📄 PDF Helper</strong>
+        <span>Organize and prepare PDF workflows</span>
+      </button>
+
+      <button class="doc"
+        onclick="openTool('resume')">
+        <strong>📋 Resume Builder</strong>
+        <span>Create a clean resume draft</span>
+      </button>
+
+      <button class="doc"
+        onclick="openTool('email')">
+        <strong>✉️ Email Helper</strong>
+        <span>Draft professional messages</span>
+      </button>
+
+      <button class="doc"
+        onclick="openTool('government')">
+        <strong>🏛️ Government</strong>
+        <span>Find official US information</span>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- CALCULATORS -->
+
+  <section class="section" id="calculators">
+
+    <div class="section-title">
+
+      <div>
+        <h2>Fast Calculators</h2>
+        <p>Transparent calculations with editable inputs</p>
+      </div>
+
+    </div>
+
+    <div class="calculator">
+
+      <div class="tabs">
+
+        <button class="active"
+          onclick="calculator('tip',this)">
+          Tip
+        </button>
+
+        <button
+          onclick="calculator('mortgage',this)">
+          Mortgage
+        </button>
+
+        <button
+          onclick="calculator('loan',this)">
+          Loan
+        </button>
+
+        <button
+          onclick="calculator('unit',this)">
+          Miles → KM
+        </button>
+
+      </div>
+
+      <div id="calculatorArea"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- AD #2 -->
+
+  <div class="ad" style="margin-top:40px">
+    <span>ADVERTISEMENT</span>
+    <strong>728 × 90</strong>
+  </div>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div>
+      <strong>Everyday</strong>
+      <p>Helpful tools for everyday life.</p>
+    </div>
+
+    <div class="footer-links">
+
+      <a href="#settings">Privacy</a>
+      <a href="#settings">Terms</a>
+      <a href="#settings">Settings</a>
+      <a href="https://www.usa.gov/" target="_blank">
+        USA.gov
+      </a>
+
+    </div>
+
+    <small style="width:100%">
+      © <span id="year"></span> Everyday — US Life Assistant
+    </small>
+
+  </footer>
+
+</main>
+
+
+<!-- MOBILE NAV -->
+
+<nav class="mobile-nav">
+
+  <a href="#home">
+    ⌂
+    <small>Home</small>
+  </a>
+
+  <a href="#assistant">
+    ✦
+    <small>AI</small>
+  </a>
+
+  <a href="#tools">
+    ▦
+    <small>Tools</small>
+  </a>
+
+  <a href="#jobs">
+    ♙
+    <small>Jobs</small>
+  </a>
+
+  <a href="#settings">
+    ⚙
+    <small>More</small>
+  </a>
+
+</nav>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+  <div class="modal-box">
+
+    <button class="close"
+      onclick="closeModal()">×</button>
+
+    <div id="modalContent"></div>
+
+  </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* BASIC */
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+
+/* DARK MODE */
+
+function toggleDark(){
+
+  document.body.classList.toggle("dark");
+
+  localStorage.setItem(
+    "everydayDark",
+    document.body.classList.contains("dark")
+  );
+
+}
+
+if(localStorage.getItem("everydayDark")==="true"){
+  document.body.classList.add("dark");
+}
+
+
+/* SEARCH */
+
+let searches =
+  Number(localStorage.getItem("searches") || 0);
+
+function doSearch(){
+
+  const input =
+    document.getElementById("heroSearch");
+
+  const q=input.value.trim();
+
+  if(!q){
+
+    showToast("Please enter what you need.");
+
+    return;
+
+  }
+
+  searches++;
+
+  localStorage.setItem("searches",searches);
+
+  document.getElementById("searchCount")
+    .textContent=searches;
+
+  document.getElementById("topSearch")
+    .value=q;
+
+  document.getElementById("activity").className="";
+
+  document.getElementById("activity").innerHTML=`
+
+    <div style="padding:25px 5px">
+
+      <strong style="font-size:13px">
+        ⌕ ${escapeHtml(q)}
+      </strong>
+
+      <p style="font-size:10px;color:var(--muted);margin-top:5px">
+        Just now
+      </p>
+
+    </div>
+
+  `;
+
+  showToast(
+    "Search request received. Connect a live search API for real results."
+  );
+
+}
+
+function quickSearch(text){
+
+  document.getElementById("heroSearch")
+    .value=text;
+
+  doSearch();
+
+}
+
+document.getElementById("heroSearch")
+  .addEventListener("keydown",function(e){
+
+    if(e.key==="Enter") doSearch();
+
+  });
+
+document.getElementById("topSearch")
+  .addEventListener("keydown",function(e){
+
+    if(e.key==="Enter"){
+
+      document.getElementById("heroSearch")
+        .value=this.value;
+
+      doSearch();
+
+    }
+
+  });
+
+
+/* MODAL */
+
+function openModal(html){
+
+  document.getElementById("modalContent")
+    .innerHTML=html;
+
+  document.getElementById("modal")
+    .classList.add("show");
+
+}
+
+function closeModal(){
+
+  document.getElementById("modal")
+    .classList.remove("show");
+
+}
+
+document.getElementById("modal")
+  .addEventListener("click",function(e){
+
+    if(e.target===this) closeModal();
+
+  });
+
+
+/* TOOLS */
+
+function openTool(type){
+
+  let html="";
+
+  if(type==="ai"){
+
+    html=`
+
+      <div class="eyebrow">AI ASSISTANT</div>
+
+      <h2>What do you need to accomplish?</h2>
+
+      <p>
+        Describe your task and the production version can use
+        an AI backend plus verified sources to create a useful plan.
+      </p>
+
+      <div class="field">
+
+        <label>YOUR TASK</label>
+
+        <textarea id="aiTask"
+          style="height:100px;padding:10px"
+          placeholder="Example: Help me plan a move to Texas"></textarea>
+
+      </div>
+
+      <button class="primary"
+        style="margin-top:15px"
+        onclick="createAIPlan()">
+        Create Plan
+      </button>
+
+    `;
+
+  }
+
+
+  if(type==="jobs"){
+
+    html=`
+
+      <div class="eyebrow">CAREER</div>
+
+      <h2>Find a Job</h2>
+
+      <p>
+        Enter your preferred job and location.
+        Live listings require a verified jobs API.
+      </p>
+
+      <div class="calc-form">
+
+        <div class="field">
+          <label>JOB TITLE</label>
+          <input id="jobTitle"
+            placeholder="Customer Support">
+        </div>
+
+        <div class="field">
+          <label>LOCATION</label>
+          <input id="jobLocation"
+            placeholder="Dallas, TX">
+        </div>
+
+        <div class="field">
+          <label>TYPE</label>
+          <input placeholder="Full-time">
+        </div>
+
+      </div>
+
+      <button class="primary"
+        style="margin-top:15px"
+        onclick="showToast('Connect a verified jobs API for live listings.')">
+        Search Jobs
+      </button>
+
+    `;
+
+  }
+
+
+  if(type==="shopping"){
+
+    html=`
+
+      <div class="eyebrow">SHOPPING</div>
+
+      <h2>Compare Products</h2>
+
+      <p>
+        Compare prices, specifications, shipping and reviews
+        through verified product APIs.
+      </p>
+
+      <div class="field">
+
+        <label>PRODUCT</label>
+
+        <input id="product"
+          placeholder="Laptop for college">
+
+      </div>
+
+      <button class="primary"
+        style="margin-top:15px"
+        onclick="showToast('Connect product APIs for live prices.')">
+        Compare Products
+      </button>
+
+    `;
+
+  }
+
+
+  if(type==="local"){
+
+    html=`
+
+      <div class="eyebrow">LOCAL SERVICES</div>
+
+      <h2>Find Nearby Services</h2>
+
+      <p>
+        Search for plumbers, restaurants, dentists, movers,
+        cleaners and other nearby businesses.
+      </p>
+
+      <div class="field">
+
+        <label>SERVICE</label>
+
+        <input
+          placeholder="Plumber, dentist, moving company...">
+
+      </div>
+
+      <button class="primary"
+        style="margin-top:15px"
+        onclick="showToast('Connect a maps/local-business API for live results.')">
+        Find Nearby
+      </button>
+
+    `;
+
+  }
+
+
+  if(type==="budget"){
+
+    html=`
+
+      <div class="eyebrow">MONEY TOOL</div>
+
+      <h2>Budget Planner</h2>
+
+      <p>
+        Simple monthly planning calculator.
+      </p>
+
+      <div class="calc-form">
+
+        <div class="field">
+          <label>INCOME</label>
+          <input id="income"
+            type="number"
+            value="5000">
+        </div>
+
+        <div class="field">
+          <label>FIXED EXPENSES</label>
+          <input id="fixed"
+            type="number"
+            value="2500">
+        </div>
+
+        <div class="field">
+          <label>OTHER EXPENSES</label>
+          <input id="other"
+            type="number"
+            value="800">
+        </div>
+
+      </div>
+
+      <button class="primary"
+        style="margin-top:15px"
+        onclick="budgetCalc()">
+        Calculate
+      </button>
+
+      <div id="budgetResult"></div>
+
+    `;
+
+  }
+
+
+  if(type==="mortgage"){
+
+    html=`
+
+      <div class="eyebrow">HOME</div>
+
+      <h2>Mortgage Calculator</h2>
+
+      <p>
+        Principal and interest estimate only.
+      </p>
+
+      <div class="calc-form">
+
+        <div class="field">
+          <label>HOME PRICE</label>
+          <input id="homePrice"
+            type="number"
+            value="350000">
+        </div>
+
+        <div class="field">
+          <label>DOWN PAYMENT</label>
+          <input id="down"
+            type="number"
+            value="70000">
+        </div>
+
+        <div class="field">
+          <label>ANNUAL RATE %</label>
+          <input id="rate"
+            type="number"
+            value="6.5">
+        </div>
+
+        <div class="field">
+          <label>YEARS</label>
+          <input id="years"
+            type="number"
+            value="30">
+        </div>
+
+      </div>
+
+      <button class="primary"
+        style="margin-top:15px"
+        onclick="mortgageCalc()">
+        Calculate
+      </button>
+
+      <div id="mortgageResult"></div>
+
+    `;
+
+  }
+
+
+  if(type==="loan"){
+
+    html=`
+
+      <div class="eyebrow">MONEY TOOL</div>
+
+      <h2>Loan Calculator</h2>
+
+      <div class="calc-form">
+
+        <div class="field">
+          <label>LOAN AMOUNT</label>
+          <input id="loanAmount"
+            type="number"
+            value="20000">
+        </div>
+
+        <div class="field">
+          <label>ANNUAL RATE %</label>
+          <input id="loanRate"
+            type="number"
+            value="8">
+        </div>
+
+        <div class="field">
+          <label>YEARS</label>
+          <input id="loanYears"
+            type="number"
+            value="5">
+        </div>
+
+      </div>
+
+      <button class="primary"
+        style="margin-top:15px"
+        onclick="loanCalc()">
+        Calculate
+      </button>
+
+      <div id="loanResult"></div>
+
+    `;
+
+  }
+
+
+  if(type==="tip"){
+
+    html=`
+
+      <div class="eyebrow">RESTAURANT</div>
+
+      <h2>Tip Calculator</h2>
+
+      <div class="calc-form">
+
+        <div class="field">
+          <label>BILL</label>
+          <input id="bill"
+            type="number"
+            value="80">
+        </div>
+
+        <div class="field">
+          <label>TIP %</label>
+          <input id="tip"
+            type="number"
+            value="20">
+        </div>
+
+        <div class="field">
+          <label>PEOPLE</label>
+          <input id="people"
+            type="number"
+            value="2">
+        </div>
+
+      </div>
+
+      <button class="primary"
+        style="margin-top:15px"
+        onclick="tipCalc()">
+        Calculate
+      </button>
+
+      <div id="tipResult"></div>
+
+    `;
+
+  }
+
+
+  if(type==="salary"){
+
+    html=`
+
+      <div class="eyebrow">CAREER</div>
+
+      <h2>Salary Calculator</h2>
+
+      <p>
+        Gross-pay estimate. Actual take-home pay depends on
+        taxes, benefits and filing status.
+      </p>
+
+      <div class="calc-form">
+
+        <div class="field">
+          <label>ANNUAL SALARY</label>
+          <input id="salary"
+            type="number"
+            value="70000">
+        </div>
+
+        <div class="field">
+          <label>PAY PERIODS</label>
+          <input id="periods"
+            type="number"
+            value="26">
+        </div>
+
+      </div>
+
+      <button class="primary"
+        style="margin-top:15px"
+        onclick="salaryCalc()">
+        Calculate
+      </button>
+
+      <div id="salaryResult"></div>
+
+    `;
+
+  }
+
+
+  if(type==="unit"){
+
+    html=`
+
+      <div class="eyebrow">CONVERTER</div>
+
+      <h2>Miles → Kilometers</h2>
+
+      <div class="field">
+
+        <label>MILES</label>
+
+        <input id="miles"
+          type="number"
+          value="10">
+
+      </div>
+
+      <button class="primary"
+        style="margin-top:15px"
+        onclick="unitCalc()">
+        Convert
+      </button>
+
+      <div id="unitResult"></div>
+
+    `;
+
+  }
+
+
+  if(type==="documents"){
+
+    html=`
+
+      <div class="eyebrow">DOCUMENT CENTER</div>
+
+      <h2>Documents & Files</h2>
+
+      <p>
+        This interface is ready for secure PDF, resume and
+        document-processing integrations.
+      </p>
+
+      <div class="result">
+        <small>Available workflows</small>
+        <strong>PDF · Resume · Email · Forms</strong>
+      </div>
+
+    `;
+
+  }
+
+
+  if(type==="pdf"){
+
+    html=`
+
+      <div class="eyebrow">PDF</div>
+
+      <h2>PDF Helper</h2>
+
+      <p>
+        Production version can add PDF merge, split, rotate,
+        compression and text extraction.
+      </p>
+
+      <div class="result">
+        <strong>PDF workspace ready</strong>
+      </div>
+
+    `;
+
+  }
+
+
+  if(type==="resume"){
+
+    html=`
+
+      <div class="eyebrow">CAREER</div>
+
+      <h2>Resume Builder</h2>
+
+      <div class="calc-form">
+
+        <div class="field">
+          <label>NAME</label>
+          <input placeholder="Your name">
+        </div>
+
+        <div class="field">
+          <label>TARGET ROLE</label>
+          <input placeholder="Software Developer">
+        </div>
+
+      </div>
+
+      <button class="primary"
+        style="margin-top:15px"
+        onclick="showToast('Resume workflow ready.')">
+        Create Resume
+      </button>
+
+    `;
+
+  }
+
+
+  if(type==="email"){
+
+    html=`
+
+      <div class="eyebrow">WRITING</div>
+
+      <h2>Email Helper</h2>
+
+      <p>
+        Describe the situation and generate a professional
+        draft through your production AI backend.
+      </p>
+
+      <textarea
+        style="width:100%;height:120px;border:1px solid var(--line);border-radius:10px;padding:10px"
+        placeholder="Example: Ask my landlord to repair the heater"></textarea>
+
+      <button class="primary"
+        style="margin-top:15px"
+        onclick="showToast('Connect your AI backend for drafting.')">
+        Draft Email
+      </button>
+
+    `;
+
+  }
+
+
+  if(type==="government"){
+
+    html=`
+
+      <div class="eyebrow">OFFICIAL RESOURCES</div>
+
+      <h2>US Government Resources</h2>
+
+      <p>
+        For important government information, use official
+        government sources.
+      </p>
+
+      <a
+        class="primary"
+        style="display:inline-block"
+        href="https://www.usa.gov/"
+        target="_blank">
+        Open USA.gov
+      </a>
+
+    `;
+
+  }
+
+  openModal(html);
+
+}
+
+
+/* AI */
+
+function createAIPlan(){
+
+  const task =
+    document.getElementById("aiTask").value;
+
+  if(!task){
+
+    showToast("Please describe your task.");
+
+    return;
+
+  }
+
+  openModal(`
+
+    <div class="eyebrow">AI PLAN</div>
+
+    <h2>Your Everyday Plan</h2>
+
+    <p>
+      Task:
+      <strong>${escapeHtml(task)}</strong>
+    </p>
+
+    <div class="result">
+
+      <small>Suggested workflow</small>
+
+      <strong>
+        Understand → Gather verified information
+        → Compare → Review → Take action
+      </strong>
+
+    </div>
+
+    <p style="margin-top:15px">
+      Live AI answers require an AI API connected through
+      a secure backend.
+    </p>
+
+  `);
+
+}
+
+
+/* BUDGET */
+
+function budgetCalc(){
+
+  const income =
+    Number(document.getElementById("income").value);
+
+  const fixed =
+    Number(document.getElementById("fixed").value);
+
+  const other =
+    Number(document.getElementById("other").value);
+
+  const result=income-fixed-other;
+
+  document.getElementById("budgetResult").innerHTML=`
+
+    <div class="result">
+
+      <small>Remaining per month</small>
+
+      <strong>
+        $${result.toLocaleString(undefined,{
+          minimumFractionDigits:2,
+          maximumFractionDigits:2
+        })}
+      </strong>
+
+    </div>
+
+  `;
+
+}
+
+
+/* MORTGAGE */
+
+function payment(principal,annualRate,years){
+
+  const monthlyRate=annualRate/100/12;
+
+  const months=years*12;
+
+  if(monthlyRate===0)
+    return principal/months;
+
+  return principal*
+    monthlyRate*
+    Math.pow(1+monthlyRate,months)/
+    (Math.pow(1+monthlyRate,months)-1);
+
+}
+
+function mortgageCalc(){
+
+  const price=
+    Number(document.getElementById("homePrice").value);
+
+  const down=
+    Number(document.getElementById("down").value);
+
+  const rate=
+    Number(document.getElementById("rate").value);
+
+  const years=
+    Number(document.getElementById("years").value);
+
+  const amount=price-down;
+
+  const monthly=
+    payment(amount,rate,years);
+
+  document.getElementById("mortgageResult").innerHTML=`
+
+    <div class="result">
+
+      <small>Estimated monthly principal & interest</small>
+
+      <strong>$${monthly.toFixed(2)}</strong>
+
+    </div>
+
+  `;
+
+}
+
+
+/* LOAN */
+
+function loanCalc(){
+
+  const amount=
+    Number(document.getElementById("loanAmount").value);
+
+  const rate=
+    Number(document.getElementById("loanRate").value);
+
+  const years=
+    Number(document.getElementById("loanYears").value);
+
+  const monthly=
+    payment(amount,rate,years);
+
+  document.getElementById("loanResult").innerHTML=`
+
+    <div class="result">
+
+      <small>Estimated monthly payment</small>
+
+      <strong>$${monthly.toFixed(2)}</strong>
+
+    </div>
+
+  `;
+
+}
+
+
+/* TIP */
+
+function tipCalc(){
+
+  const bill=
+    Number(document.getElementById("bill").value);
+
+  const tip=
+    Number(document.getElementById("tip").value);
+
+  const people=
+    Math.max(
+      1,
+      Number(document.getElementById("people").value)
+    );
+
+  const total=
+    bill+(bill*tip/100);
+
+  const each=
+    total/people;
+
+  document.getElementById("tipResult").innerHTML=`
+
+    <div class="result">
+
+      <small>Total per person</small>
+
+      <strong>$${each.toFixed(2)}</strong>
+
+    </div>
+
+  `;
+
+}
+
+
+/* SALARY */
+
+function salaryCalc(){
+
+  const salary=
+    Number(document.getElementById("salary").value);
+
+  const periods=
+    Math.max(
+      1,
+      Number(document.getElementById("periods").value)
+    );
+
+  const gross=
+    salary/periods;
+
+  document.getElementById("salaryResult").innerHTML=`
+
+    <div class="result">
+
+      <small>Gross pay per period</small>
+
+      <strong>$${gross.toFixed(2)}</strong>
+
+    </div>
+
+  `;
+
+}
+
+
+/* UNIT */
+
+function unitCalc(){
+
+  const miles=
+    Number(document.getElementById("miles").value);
+
+  const km=
+    miles*1.609344;
+
+  document.getElementById("unitResult").innerHTML=`
+
+    <div class="result">
+
+      <small>Kilometers</small>
+
+      <strong>${km.toFixed(3)} km</strong>
+
+    </div>
+
+  `;
+
+}
+
+
+/* CALCULATOR TABS */
+
+function calculator(type,button){
+
+  document.querySelectorAll(".tabs button")
+    .forEach(b=>b.classList.remove("active"));
+
+  button.classList.add("active");
+
+  let html="";
+
+  if(type==="tip"){
+
+    html=`
+
+      <div class="calc-form">
+
+        <div class="field">
+          <label>BILL</label>
+          <input id="cBill" type="number" value="80"
+            oninput="updateTip()">
+        </div>
+
+        <div class="field">
+          <label>TIP %</label>
+          <input id="cTip" type="number" value="20"
+            oninput="updateTip()">
+        </div>
+
+        <div class="field">
+          <label>PEOPLE</label>
+          <input id="cPeople" type="number" value="2"
+            oninput="updateTip()">
+        </div>
+
+      </div>
+
+      <div class="result">
+        <small>Total / person</small>
+        <strong id="cResult">$48.00</strong>
+      </div>
+
+    `;
+
+  }
+
+  if(type==="mortgage"){
+
+    html=`
+
+      <div class="calc-form">
+
+        <div class="field">
+          <label>HOME PRICE</label>
+          <input id="cHome" type="number" value="350000"
+            oninput="updateMortgage()">
+        </div>
+
+        <div class="field">
+          <label>DOWN PAYMENT</label>
+          <input id="cDown" type="number" value="70000"
+            oninput="updateMortgage()">
+        </div>
+
+        <div class="field">
+          <label>RATE %</label>
+          <input id="cRate" type="number" value="6.5"
+            oninput="updateMortgage()">
+        </div>
+
+        <div class="field">
+          <label>YEARS</label>
+          <input id="cYears" type="number" value="30"
+            oninput="updateMortgage()">
+        </div>
+
+      </div>
+
+      <div class="result">
+        <small>Monthly principal & interest</small>
+        <strong id="cResult">—</strong>
+      </div>
+
+    `;
+
+  }
+
+  if(type==="loan"){
+
+    html=`
+
+      <div class="calc-form">
+
+        <div class="field">
+          <label>LOAN</label>
+          <input id="cLoan" type="number" value="20000"
+            oninput="updateLoan()">
+        </div>
+
+        <div class="field">
+          <label>RATE %</label>
+          <input id="cLoanRate" type="number" value="8"
+            oninput="updateLoan()">
+        </div>
+
+        <div class="field">
+          <label>YEARS</label>
+          <input id="cLoanYears" type="number" value="5"
+            oninput="updateLoan()">
+        </div>
+
+      </div>
+
+      <div class="result">
+        <small>Monthly payment</small>
+        <strong id="cResult">—</strong>
+      </div>
+
+    `;
+
+  }
+
+  if(type==="unit"){
+
+    html=`
+
+      <div class="calc-form">
+
+        <div class="field">
+
+          <label>MILES</label>
+
+          <input id="cMiles"
+            type="number"
+            value="10"
+            oninput="updateUnit()">
+
+        </div>
+
+      </div>
+
+      <div class="result">
+
+        <small>Kilometers</small>
+
+        <strong id="cResult">16.093 km</strong>
+
+      </div>
+
+    `;
+
+  }
+
+  document.getElementById("calculatorArea")
+    .innerHTML=html;
+
+  if(type==="mortgage") updateMortgage();
+  if(type==="loan") updateLoan();
+  if(type==="unit") updateUnit();
+
+}
+
+
+/* CALCULATOR LIVE FUNCTIONS */
+
+function updateTip(){
+
+  const b=Number(
+    document.getElementById("cBill").value
+  );
+
+  const t=Number(
+    document.getElementById("cTip").value
+  );
+
+  const p=Math.max(
+    1,
+    Number(document.getElementById("cPeople").value)
+  );
+
+  document.getElementById("cResult")
+    .textContent="$"+((b+b*t/100)/p).toFixed(2);
+
+}
+
+function updateMortgage(){
+
+  const p=
+    Number(document.getElementById("cHome").value)-
+    Number(document.getElementById("cDown").value);
+
+  const r=
+    Number(document.getElementById("cRate").value);
+
+  const y=
+    Number(document.getElementById("cYears").value);
+
+  document.getElementById("cResult")
+    .textContent="$"+payment(p,r,y).toFixed(2);
+
+}
+
+function updateLoan(){
+
+  const p=
+    Number(document.getElementById("cLoan").value);
+
+  const r=
+    Number(document.getElementById("cLoanRate").value);
+
+  const y=
+    Number(document.getElementById("cLoanYears").value);
+
+  document.getElementById("cResult")
+    .textContent="$"+payment(p,r,y).toFixed(2);
+
+}
+
+function updateUnit(){
+
+  const miles=
+    Number(document.getElementById("cMiles").value);
+
+  document.getElementById("cResult")
+    .textContent=(miles*1.609344).toFixed(3)+" km";
+
+}
+
+
+/* GOOGLE LOGIN PLACEHOLDER */
+
+function googleLogin(){
+
+  openModal(`
+
+    <div class="eyebrow">ACCOUNT</div>
+
+    <h2>Continue with Google</h2>
+
+    <p>
+      Google authentication needs Google OAuth / Google Identity
+      Services configured with a secure backend.
+    </p>
+
+    <div class="result">
+
+      <small>Production requirement</small>
+
+      <strong>
+        OAuth Client ID + secure server-side session
+      </strong>
+
+    </div>
+
+  `);
+
+}
+
+
+/* PROFILE */
+
+function showProfile(){
+
+  openModal(`
+
+    <div class="eyebrow">PROFILE</div>
+
+    <h2>Your Everyday Account</h2>
+
+    <p>
+      Account settings, saved searches, favorites and
+      connected services will appear here.
+    </p>
+
+    <div class="result">
+
+      <small>Account status</small>
+
+      <strong>Guest</strong>
+
+    </div>
+
+  `);
+
+}
+
+
+/* NOTIFICATIONS */
+
+function showNotifications(){
+
+  openModal(`
+
+    <div class="eyebrow">NOTIFICATIONS</div>
+
+    <h2>No new notifications</h2>
+
+    <p>
+      Important updates and reminders will appear here.
+    </p>
+
+  `);
+
+}
+
+
+/* ACTIVITY */
+
+function clearActivity(){
+
+  document.getElementById("activity").className="empty";
+
+  document.getElementById("activity").innerHTML=`
+
+    <div style="font-size:25px">◷</div>
+
+    <strong>No activity yet</strong>
+
+    <small>
+      Your recent searches will appear here.
+    </small>
+
+  `;
+
+}
+
+
+/* TOAST */
+
+function showToast(message){
+
+  const toast=
+    document.getElementById("toast");
+
+  toast.textContent=message;
+
+  toast.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer=setTimeout(
+    ()=>toast.classList.remove("show"),
+    2800
+  );
+
+}
+
+
+/* ESCAPE HTML */
+
+function escapeHtml(text){
+
+  return String(text).replace(
+    /[&<>"']/g,
+    function(match){
+
+      return {
+
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+
+      }[match];
+
+    }
+  );
+
+}
+
+
+/* INITIAL CALCULATOR */
+
+calculator(
+  "tip",
+  document.querySelector(".tabs button")
+);
+
+
+/* KEYBOARD SEARCH */
+
+document.addEventListener("keydown",function(e){
+
+  if((e.ctrlKey || e.metaKey) &&
+     e.key.toLowerCase()==="k"){
+
+    e.preventDefault();
+
+    document.getElementById("topSearch").focus();
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
