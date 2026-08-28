@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://us-everyday-life-assistant.bmstudio72392.workers.dev/sitemap.xml
