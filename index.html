@@ -974,6 +974,58 @@ body.dark .field textarea{
     <button class="google-btn" onclick="googleLogin()">G&nbsp; Continue with Google</button>
     <button class="avatar" onclick="showProfile()">U</button>
   </div>
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDjdwTuA5mzObojNQgGXZLOg46FUunmcoc",
+    authDomain: "everyday-us-life.firebaseapp.com",
+    projectId: "everyday-us-life",
+    storageBucket: "everyday-us-life.firebasestorage.app",
+    messagingSenderId: "106207773353",
+    appId: "1:106207773353:web:9047cec7b31b7b15f9dfb8"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  window.firebaseAuth = auth;
+  window.currentUser = null;
+
+  window.doGoogleLogin = function () {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        window.currentUser = result.user;
+        window.showToast("Signed in as " + result.user.displayName);
+        window.updateLoginUI();
+      })
+      .catch((error) => {
+        window.showToast("Login failed: " + error.message);
+      });
+  };
+
+  window.doGoogleLogout = function () {
+    signOut(auth).then(() => {
+      window.currentUser = null;
+      window.showToast("Signed out");
+      window.updateLoginUI();
+    });
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    window.currentUser = user;
+    if (window.updateLoginUI) window.updateLoginUI();
+  });
+</script>
+</head>
 
 </header>
 
@@ -2784,31 +2836,28 @@ function updateUnit(){
 /* GOOGLE LOGIN PLACEHOLDER */
 
 function googleLogin(){
-
-  openModal(`
-
-    <div class="eyebrow">ACCOUNT</div>
-
-    <h2>Continue with Google</h2>
-
-    <p>
-      Google authentication needs Google OAuth / Google Identity
-      Services configured with a secure backend.
-    </p>
-
-    <div class="result">
-
-      <small>Production requirement</small>
-
-      <strong>
-        OAuth Client ID + secure server-side session
-      </strong>
-
-    </div>
-
-  `);
-
+  if(window.currentUser){
+    window.doGoogleLogout();
+  } else {
+    window.doGoogleLogin();
+  }
 }
+
+function updateLoginUI(){
+  const btn = document.querySelector(".google-btn");
+  const avatar = document.querySelector(".avatar");
+  if(window.currentUser){
+    btn.innerHTML = "Sign out";
+    avatar.textContent = window.currentUser.displayName
+      ? window.currentUser.displayName.charAt(0).toUpperCase()
+      : "U";
+  } else {
+    btn.innerHTML = "G&nbsp; Continue with Google";
+    avatar.textContent = "U";
+  }
+}
+
+window.updateLoginUI = updateLoginUI;
 
 
 /* PROFILE */
