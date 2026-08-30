@@ -27,6 +27,7 @@ export default {
         });
 
       } catch (err) {
+        console.log("AI ERROR:", err.message, err.stack);
         return new Response(JSON.stringify({
           answer: "Something went wrong generating your plan. Please try again."
         }), {
