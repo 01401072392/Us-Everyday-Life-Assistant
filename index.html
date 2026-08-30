@@ -1007,6 +1007,21 @@ body.dark .field textarea{
 
   window.firebaseAuth = auth;
   window.currentUser = null;
+    window.toggleFavorite = async function(toolId, toolName){
+    if(!window.currentUser){
+      window.showToast("Please sign in to save favorites.");
+      return;
+    }
+    const favRef = doc(db, "users", window.currentUser.uid, "favorites", toolId);
+    const existing = await getDoc(favRef);
+    if(existing.exists()){
+      await setDoc(favRef, { removed: true });
+      window.showToast("Removed from favorites.");
+    } else {
+      await setDoc(favRef, { name: toolName, addedAt: new Date().toISOString() });
+      window.showToast("Added to favorites!");
+    }
+  };
 
   window.doGoogleLogin = function () {
     signInWithPopup(auth, provider)
