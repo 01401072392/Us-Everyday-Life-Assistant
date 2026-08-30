@@ -2436,7 +2436,7 @@ html += `
 
 /* AI */
 
-function createAIPlan(){
+async function createAIPlan(){
 
   const task =
     document.getElementById("aiTask").value;
@@ -2450,36 +2450,40 @@ function createAIPlan(){
   }
 
   openModal(`
-
     <div class="eyebrow">AI PLAN</div>
-
     <h2>Your Everyday Plan</h2>
-
-    <p>
-      Task:
-      <strong>${escapeHtml(task)}</strong>
-    </p>
-
+    <p>Task: <strong>${escapeHtml(task)}</strong></p>
     <div class="result">
-
-      <small>Suggested workflow</small>
-
-      <strong>
-        Understand → Gather verified information
-        → Compare → Review → Take action
-      </strong>
-
+      <small>Thinking...</small>
+      <strong>Generating your plan, please wait.</strong>
     </div>
-
-    <p style="margin-top:15px">
-      Live AI answers require an AI API connected through
-      a secure backend.
-    </p>
-
   `);
 
-}
+  try {
+    const res = await fetch("/api/ai", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ task })
+    });
+    const data = await res.json();
 
+    openModal(`
+      <div class="eyebrow">AI PLAN</div>
+      <h2>Your Everyday Plan</h2>
+      <p>Task: <strong>${escapeHtml(task)}</strong></p>
+      <div class="result" style="white-space:pre-wrap">
+        ${escapeHtml(data.answer)}
+      </div>
+    `);
+  } catch(err) {
+    openModal(`
+      <div class="eyebrow">AI PLAN</div>
+      <h2>Something went wrong</h2>
+      <p>Please try again in a moment.</p>
+    `);
+  }
+
+}
 
 /* BUDGET */
 
