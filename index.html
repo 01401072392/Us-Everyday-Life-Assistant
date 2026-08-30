@@ -1017,10 +1017,26 @@ body.dark .field textarea{
     if(existing.exists()){
       await setDoc(favRef, { removed: true });
       window.showToast("Removed from favorites.");
+      window.updateSavedCount();
     } else {
       await setDoc(favRef, { name: toolName, addedAt: new Date().toISOString() });
       window.showToast("Added to favorites!");
+      window.updateSavedCount();
     }
+  };
+    window.updateSavedCount = async function(){
+    if(!window.currentUser){
+      document.getElementById("savedCount").textContent = "0";
+      return;
+    }
+    const { collection, getDocs } = await import("https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js");
+    const favCol = collection(db, "users", window.currentUser.uid, "favorites");
+    const snapshot = await getDocs(favCol);
+    let count = 0;
+    snapshot.forEach((docSnap) => {
+      if(!docSnap.data().removed) count++;
+    });
+    document.getElementById("savedCount").textContent = String(count);
   };
     window.showFavorites = async function(){
     if(!window.currentUser){
@@ -2927,6 +2943,7 @@ function updateLoginUI(){
     btn.innerHTML = "G&nbsp; Continue with Google";
     avatar.textContent = "U";
   }
+  window.updateSavedCount();
 }
 
 window.updateLoginUI = updateLoginUI;
