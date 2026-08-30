@@ -1,0 +1,10 @@
+name = "us-everyday-life-assistant"
+compatibility_date = "2025-01-01"
+main = "_worker.js"
+
+[assets]
+directory = "."
+binding = "ASSETS"
+
+[ai]
+binding = "AI"
