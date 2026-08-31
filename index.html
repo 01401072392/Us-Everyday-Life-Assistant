@@ -1870,34 +1870,29 @@ function openTool(type){
 
   let html="";
 
-  if(type==="ai"){
+ if(type==="ai"){
+
+    window.aiHistory = [];
 
     html=`
 
       <div class="eyebrow">AI ASSISTANT</div>
 
-      <h2>What do you need to accomplish?</h2>
+      <h2>Ask Everyday AI</h2>
 
-      <p>
-        Describe your task and the production version can use
-        an AI backend plus verified sources to create a useful plan.
-      </p>
+      <div id="aiChatLog"
+        style="max-height:320px;overflow-y:auto;margin-top:10px;display:flex;flex-direction:column;gap:10px"></div>
 
-      <div class="field">
+      <div style="display:flex;gap:8px;margin-top:15px">
 
-        <label>YOUR TASK</label>
+        <input id="aiTask"
+          style="flex:1;height:44px;border:1px solid var(--line);border-radius:9px;padding:0 12px"
+          placeholder="Ask anything..."
+          onkeydown="if(event.key==='Enter'){sendAIMessage();}">
 
-        <textarea id="aiTask"
-          style="height:100px;padding:10px"
-          placeholder="Example: Help me plan a move to Texas"></textarea>
+        <button class="primary" onclick="sendAIMessage()">Send</button>
 
       </div>
-
-      <button class="primary"
-        style="margin-top:15px"
-        onclick="createAIPlan()">
-        Create Plan
-      </button>
 
     `;
 
