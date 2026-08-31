@@ -2431,51 +2431,61 @@ html += `
 
 /* AI */
 
-async function createAIPlan(){
+async function sendAIMessage(){
 
-  const task =
-    document.getElementById("aiTask").value;
+  const input = document.getElementById("aiTask");
+  const task = input.value.trim();
 
   if(!task){
-
-    showToast("Please describe your task.");
-
+    showToast("Please type a message.");
     return;
-
   }
 
-  openModal(`
-    <div class="eyebrow">AI PLAN</div>
-    <h2>Your Everyday Plan</h2>
-    <p>Task: <strong>${escapeHtml(task)}</strong></p>
-    <div class="result">
-      <small>Thinking...</small>
-      <strong>Generating your plan, please wait.</strong>
+  input.value = "";
+
+  const log = document.getElementById("aiChatLog");
+
+  log.innerHTML += `
+    <div style="align-self:flex-end;background:var(--soft);color:var(--blue);padding:10px 14px;border-radius:12px;max-width:80%">
+      ${escapeHtml(task)}
     </div>
-  `);
+  `;
+  log.scrollTop = log.scrollHeight;
+
+  const thinkingId = "think-" + Date.now();
+
+  log.innerHTML += `
+    <div id="${thinkingId}" style="align-self:flex-start;background:#f0f3f7;padding:10px 14px;border-radius:12px;max-width:80%">
+      Thinking...
+    </div>
+  `;
+  log.scrollTop = log.scrollHeight;
 
   try {
     const res = await fetch("/api/ai", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ task })
+      body: JSON.stringify({ task, history: window.aiHistory || [] })
     });
     const data = await res.json();
 
-    openModal(`
-      <div class="eyebrow">AI PLAN</div>
-      <h2>Your Everyday Plan</h2>
-      <p>Task: <strong>${escapeHtml(task)}</strong></p>
-      <div class="result" style="white-space:pre-wrap">
+    window.aiHistory = window.aiHistory || [];
+    window.aiHistory.push({ role: "user", content: task });
+    window.aiHistory.push({ role: "assistant", content: data.answer });
+
+    document.getElementById(thinkingId).outerHTML = `
+      <div style="align-self:flex-start;background:#f0f3f7;padding:10px 14px;border-radius:12px;max-width:80%;white-space:pre-wrap">
         ${escapeHtml(data.answer)}
       </div>
-    `);
+    `;
+    log.scrollTop = log.scrollHeight;
+
   } catch(err) {
-    openModal(`
-      <div class="eyebrow">AI PLAN</div>
-      <h2>Something went wrong</h2>
-      <p>Please try again in a moment.</p>
-    `);
+    document.getElementById(thinkingId).outerHTML = `
+      <div style="align-self:flex-start;background:#fee;padding:10px 14px;border-radius:12px;max-width:80%">
+        Something went wrong. Please try again.
+      </div>
+    `;
   }
 
 }
