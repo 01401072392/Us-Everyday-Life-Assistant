@@ -7,7 +7,7 @@ export default {
         const body = await request.json();
         const task = body.task || "";
 
-        const aiResponse = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+        const aiResponse = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
           messages: [
             {
               role: "system",
