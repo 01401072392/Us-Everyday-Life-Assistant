@@ -8,3 +8,8 @@ binding = "ASSETS"
 
 [ai]
 binding = "AI"
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
