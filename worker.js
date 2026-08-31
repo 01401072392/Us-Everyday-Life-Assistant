@@ -6,19 +6,20 @@ export default {
       try {
         const body = await request.json();
         const task = body.task || "";
+        const history = body.history || [];
 
         const aiResponse = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
-          messages: [
+         messages: [
             {
               role: "system",
               content: "You are a helpful everyday life assistant for people living in the United States. Give clear, practical, step-by-step advice. Keep answers concise and well organized with short sections or bullet points."
             },
+            ...history,
             {
               role: "user",
               content: task
             }
           ]
-        });
 
         return new Response(JSON.stringify({
           answer: aiResponse.response || "Sorry, I couldn't generate a response."
