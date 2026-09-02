@@ -1953,8 +1953,8 @@ function openTool(type){
       <h2>Compare Products</h2>
 
       <p>
-        Compare prices, specifications, shipping and reviews
-        through verified product APIs.
+        Search a product and we'll take you to Amazon to
+        compare prices, specifications and reviews.
       </p>
 
       <div class="field">
@@ -1962,14 +1962,15 @@ function openTool(type){
         <label>PRODUCT</label>
 
         <input id="product"
-          placeholder="Laptop for college">
+          placeholder="Laptop for college"
+          onkeydown="if(event.key==='Enter'){searchAmazon();}">
 
       </div>
 
       <button class="primary"
         style="margin-top:15px"
-        onclick="showToast('Connect product APIs for live prices.')">
-        Compare Products
+        onclick="searchAmazon()">
+        Search on Amazon
       </button>
 
     `;
