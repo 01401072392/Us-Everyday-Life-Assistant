@@ -2428,7 +2428,25 @@ html += `
   openModal(html);
 
 }
+  
+function searchAmazon(){
 
+  const product =
+    document.getElementById("product").value.trim();
+
+  if(!product){
+    showToast("Please enter a product to search.");
+    return;
+  }
+
+  const url =
+    "https://www.amazon.com/s?k=" +
+    encodeURIComponent(product) +
+    "&tag=everydayuslif-20";
+
+  window.open(url, "_blank");
+
+}
 
 /* AI */
 
